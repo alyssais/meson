@@ -78,7 +78,7 @@ class RustProject(SampleImpl):
         self.version = options.version
 
     def create_executable(self) -> None:
-        lowercase_token = re.sub(r'[^a-z0-9]', '_', self.name.lower())
+        lowercase_token = re.sub(r'[^a-z0-9-]', '_', self.name.lower())
         source_name = lowercase_token + '.rs'
         open(source_name, 'w', encoding='utf-8').write(hello_rust_template.format(project_name=self.name))
         open('meson.build', 'w', encoding='utf-8').write(
@@ -88,7 +88,7 @@ class RustProject(SampleImpl):
                                              version=self.version))
 
     def create_library(self) -> None:
-        lowercase_token = re.sub(r'[^a-z0-9]', '_', self.name.lower())
+        lowercase_token = re.sub(r'[^a-z0-9-]', '_', self.name.lower())
         uppercase_token = lowercase_token.upper()
         function_name = lowercase_token[0:3] + '_func'
         test_exe_name = lowercase_token + '_test'
